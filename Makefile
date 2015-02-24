@@ -11,6 +11,7 @@ CC = g++
 # define any compile-time flags
 CFLAGS = -Wall -g
 
+BUILDDIR = build
 # define any directories containing header files other than /usr/include
 #
 INCLUDES = #-I/home/newhall/include  -I../include
@@ -36,7 +37,7 @@ SRCS = main.cpp #emitter.c error.c init.c lexer.c main.c symbol.c parser.c
 # Below we are replacing the suffix .c of all words in the macro SRCS
 # with the .o suffix
 #
-OBJS = $(SRCS:.c=.o)
+OBJS = $(SRCS:.cpp=.o)
 
 # define the executable file 
 MAIN = tcp_server
@@ -53,17 +54,17 @@ all:    $(MAIN)
 	@echo  Simple compiler named mycc has been compiled
 
 $(MAIN): $(OBJS) 
-	$(CC) $(CFLAGS) $(INCLUDES) -o $(MAIN) $(OBJS) $(LFLAGS) $(LIBS)
+	$(CC) $(CFLAGS) $(INCLUDES) -o $(BUILDDIR)/$(MAIN) $(BUILDDIR)/$(OBJS) $(LFLAGS) $(LIBS)
 
 # this is a suffix replacement rule for building .o's from .c's
 # it uses automatic variables $<: the name of the prerequisite of
 # the rule(a .c file) and $@: the name of the target of the rule (a .o file) 
 # (see the gnu make manual section about automatic variables)
-.c.o:
-	$(CC) $(CFLAGS) $(INCLUDES) -c $<  -o $@
+.cpp.o:
+	$(CC) $(CFLAGS) $(INCLUDES) -c $<  -o $(BUILDDIR)/$@
 
 clean:
-	$(RM) *.o *~ $(MAIN)
+	$(RM) $(BUILDDIR)/*.o $(BUILDDIR)/*~ $(BUILDDIR)/$(MAIN)
 
 depend: $(SRCS)
 	makedepend $(INCLUDES) $^
