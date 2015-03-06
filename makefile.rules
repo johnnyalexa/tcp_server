@@ -1,0 +1,26 @@
+
+CC	= g++
+CFLAGS	= -Wall
+
+
+TARGET = tcp_server
+
+OBJECTS = $(SRC:.cpp=.o)
+
+all:$(OBJECTS)
+
+%.o: %.cpp
+	$(CC) -c $(CFLAGS) -o $@ $<
+
+#$(OBJECTS):$(SRC)
+#	@echo [Compiling files]\ \ \ \ $@
+#	$(CC) $(CFLAGS) -c $(SRC)
+
+clean:
+	@echo [Cleaning files]\ \ \ \ $@
+	rm  $(OBJECTS)
+
+#
+# $(TARGET): $(OBJECTS)
+#	@echo [Building Program]\ \ \ \ $@
+#	$(CC) $(CFLAGS) -o $@ $(OBJECTS)
