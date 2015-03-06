@@ -1,16 +1,20 @@
-
 CC	= g++
-CFLAGS	= -Wall
+AR	= ar
+LD	= ld
+CFLAGS	= -Wall -m32
 
+LIB_DIR	= libs
 
-TARGET = tcp_server
+#TARGET = tcp_server
 
-OBJECTS = $(SRC:.cpp=.o)
+OBJECTS += $(SRC:.cpp=.o)
 
 all:$(OBJECTS)
 
-%.o: %.cpp
-	$(CC) -c $(CFLAGS) -o $@ $<
+#all:%.o
+
+#%.o: %.cpp
+#	$(CC) -c $(CFLAGS) -o $@ $<
 
 #$(OBJECTS):$(SRC)
 #	@echo [Compiling files]\ \ \ \ $@
@@ -18,7 +22,7 @@ all:$(OBJECTS)
 
 clean:
 	@echo [Cleaning files]\ \ \ \ $@
-	rm  $(OBJECTS)
+	rm  -f $(OBJECTS) $(LIB_DIR)/*.as
 
 #
 # $(TARGET): $(OBJECTS)
