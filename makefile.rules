@@ -1,24 +1,24 @@
 CC	= g++
 AR	= ar
 LD	= ld
-CFLAGS	= -Wall -m32
-
+CFLAGS	= -Wall
+#-m32
+IFLAGS	= -pthread
 LIB_DIR	= libs
 
-#TARGET = tcp_server
 
-OBJECTS += $(SRC:.cpp=.o)
+OBJECTS	= $(SRC:.cpp=.o)
 
-all:$(OBJECTS)
+all: $(SRC) $(OBJECTS)
 
-#all:%.o
 
-#%.o: %.cpp
-#	$(CC) -c $(CFLAGS) -o $@ $<
 
-#$(OBJECTS):$(SRC)
-#	@echo [Compiling files]\ \ \ \ $@
-#	$(CC) $(CFLAGS) -c $(SRC)
+.cpp.o:
+	$(CC) $(IFLAGS) $(CFLAGS) -c $< 
+
+#-o $@
+
+
 
 clean:
 	@echo [Cleaning files]\ \ \ \ $@

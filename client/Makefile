@@ -2,10 +2,11 @@
 TOP=..
 LIB_DIR=../lib
 
-TARGET = dir2.as 
+TARGET = client.as
 
 SRC	= \
-	main.cpp \
+	client.cpp \
+#	main.cpp \
 	
 
 
@@ -15,5 +16,6 @@ all: $(TARGET)
 
 $(TARGET):
 	@echo [Building Lib]\ \ \ \ $@
+#	$(CC) -o $(TOP)/$(LIB_DIR)/$@ *.o
 	$(AR) rvs $(TOP)/$(LIB_DIR)/$(TARGET) *.o
 

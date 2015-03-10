@@ -2,10 +2,10 @@
 TOP=..
 LIB_DIR=../lib
 
-TARGET = dir1.as 
+TARGET = server.as 
 
 SRC	= \
-	file1.cpp \
+	server.cpp \
 	file2.cpp \
 
 
@@ -15,5 +15,7 @@ all: $(TARGET)
 
 $(TARGET):
 	@echo [Building Lib]\ \ \ \ $@
-	$(AR) rvs $(TOP)/$(LIB_DIR)/$(TARGET) *.o
+#	$(CC) -o $(TOP)/$(LIB_DIR)/$@ *.o
+	$(AR) rvs $(TOP)/$(LIB_DIR)/$@ *.o
+
 

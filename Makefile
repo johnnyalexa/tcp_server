@@ -1,24 +1,30 @@
-
 CC      = g++
 CFLAGS  = -Wall
 OBJECTS	=
-SUBDIRS += dir1
+LDFLAGS = -pthread
+#SUBDIRS += dir1
 
 LIB_DIR	= libs
-TARGET = tcp_server
+TARGET1 = tcp_server
+TARGET2 = tcp_client
 
-all: objects $(TARGET)
+all: objects $(TARGET1) $(TARGET2)
 
 objects:
-	cd dir1; make
-	cd dir2; make
+	cd server; make
+	cd client; make
 
-$(TARGET): $(OBJECTS)
+$(TARGET1): $(OBJECTS)
 	@echo [Building Program]\ \ \ \ $@
-	$(CC) -o $(TARGET) $(LIB_DIR)/*.as
+	$(CC) $(LDFLAGS) -o $@ $(LIB_DIR)/server.as
+
+$(TARGET2): $(OBJECTS)
+	@echo [Building Program]\ \ \ \ $@
+	$(CC) $(LDFLAGS) -o $@ $(LIB_DIR)/client.as
 
 clean:
-	cd dir1; make clean
-	cd dir2; make clean
+	cd server; make clean
+	cd client; make clean
 	cd libs; rm -f *.as
-	rm -f $(TARGET)
+	rm -f $(TARGET1)
+	rm -f $(TARGET2)
